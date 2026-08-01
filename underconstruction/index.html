@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aecreates - Under Construction</title>
+    
+    <link rel="icon" type="image/jpeg" href="acreates logo.jpg">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global-design.css">
+    
+</head>
+<body>
+
+    <div class="container" id="container">
+        <div class="orb"></div>
+        <div class="orb orb-2"></div>
+        <div class="interactive-glow" id="glow"></div>
+
+        <div class="content">
+            <span class="badge">🛠️ We Are Working Hard</span>
+            <h1>Something Awesome Is <span>Coming Soon</span></h1>
+            <p>Our website is currently undergoing scheduled maintenance and upgrades. Drop your email below to get notified the moment we launch!</p>
+            
+            <form class="notify-form" id="notifyForm">
+                <input type="email" class="notify-input" placeholder="Enter your email address..." required id="emailInput">
+                <button type="submit" class="btn" id="submitBtn">Notify Me</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mouse move interactive spotlight
+        const container = document.getElementById('container');
+        const glow = document.getElementById('glow');
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            glow.style.left = `${x}px`;
+            glow.style.top = `${y}px`;
+        });
+
+        // Dynamic Floating Particles Generator
+        function createParticles() {
+            const particleCount = 12;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 5 + 2;
+                const leftPos = Math.random() * 100;
+                const animDuration = Math.random() * 6 + 4;
+                const animDelay = Math.random() * 5;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${leftPos}%`;
+                particle.style.animationDuration = `${animDuration}s`;
+                particle.style.animationDelay = `${animDelay}s`;
+
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Form Submission Interactive Feedback
+        const notifyForm = document.getElementById('notifyForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const emailInput = document.getElementById('emailInput');
+
+        notifyForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!emailInput.value) return;
+
+            submitBtn.textContent = '✨ Subscribed!';
+            submitBtn.style.background = '#10b981';
+            submitBtn.style.boxShadow = '0 4px 20px rgba(16, 185, 129, 0.5)';
+            emailInput.value = '';
+            emailInput.disabled = true;
+
+            setTimeout(() => {
+                submitBtn.textContent = 'Notify Me';
+                submitBtn.style.background = '#6366f1';
+                submitBtn.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.4)';
+                emailInput.disabled = false;
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
