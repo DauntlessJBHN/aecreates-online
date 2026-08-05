@@ -3,92 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aecreates - Under Construction</title>
+    <title>Aecreates</title>
     
     <link rel="icon" type="image/jpeg" href="acreates logo.jpg">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="global-design.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            background-image: 
+                linear-gradient(to right, #e8e8e8 1px, transparent 1px),
+                linear-gradient(to bottom, #e8e8e8 1px, transparent 1px);
+            background-size: 50px 50px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Bounding Box Wrapper centered on screen */
+        .bounding-box-wrapper {
+            position: relative;
+            display: inline-block;
+            padding: 2.5vw 3.5vw;
+            border: 2px solid #a9a9a9;
+            background: #ffffff;
+            transition: all 0.05s ease-out;
+        }
+
+        /* Small square control handles on the corners and edges */
+        .handle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ffffff;
+            border: 2px solid #a9a9a9;
+        }
+
+        /* Corner & Edge Handles */
+        .handle-tl { top: -10px; left: -10px; }
+        .handle-tc { top: -10px; left: calc(50% - 10px); }
+        .handle-tr { top: -10px; right: -10px; }
+        .handle-ml { top: calc(50% - 10px); left: -10px; }
+        .handle-mr { top: calc(50% - 10px); right: -10px; }
+        .handle-bl { bottom: -10px; left: -10px; }
+        .handle-bc { bottom: -10px; left: calc(50% - 10px); }
+        .handle-br { bottom: -10px; right: -10px; }
+
+        /* Main Text Styling with Typing Animation Container */
+        .tagline {
+            font-size: clamp(3vw, 6vw, 5.5vw);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            color: #1c1c1c;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .tagline span {
+            color: #2cbae2;
+        }
+
+        /* Blinking cursor effect */
+        .cursor {
+            display: inline-block;
+            background-color: #2cbae2;
+            width: 5px;
+            animation: blink 0.8s infinite;
+            margin-left: 2px;
+            vertical-align: bottom;
+            height: 5vw;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            50.1%, 100% { opacity: 0; }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="container" id="container">
-        <div class="orb"></div>
-        <div class="orb orb-2"></div>
-        <div class="interactive-glow" id="glow"></div>
+    <div class="bounding-box-wrapper" id="boundingBox">
+        <!-- Selection Handles -->
+        <div class="handle handle-tl"></div>
+        <div class="handle handle-tc"></div>
+        <div class="handle handle-tr"></div>
+        <div class="handle handle-ml"></div>
+        <div class="handle handle-mr"></div>
+        <div class="handle handle-bl"></div>
+        <div class="handle handle-bc"></div>
+        <div class="handle handle-br"></div>
 
-        <div class="content">
-            <span class="badge">🛠️ We Are Working Hard</span>
-            <h1>Something Awesome Is <span>Coming Soon</span></h1>
-            <p>Our website is currently undergoing scheduled maintenance and upgrades. Drop your email below to get notified the moment we launch!</p>
-            
-            <form class="notify-form" id="notifyForm">
-                <input type="email" class="notify-input" placeholder="Enter your email address..." required id="emailInput">
-                <button type="submit" class="btn" id="submitBtn">Notify Me</button>
-            </form>
-        </div>
+        <h1 class="tagline" id="typedText"></h1><span class="cursor" id="cursor"></span>
     </div>
 
     <script>
-        // Mouse move interactive spotlight
-        const container = document.getElementById('container');
-        const glow = document.getElementById('glow');
+        const textTarget = document.getElementById('typedText');
+        const plainText = 'Under Construction';
+        
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 120;
+        const deletingSpeed = 80;
+        const holdTime = 5000; // Pause for 5 seconds before backspacing
 
-        container.addEventListener('mousemove', (e) => {
-            const rect = container.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            glow.style.left = `${x}px`;
-            glow.style.top = `${y}px`;
-        });
-
-        // Dynamic Floating Particles Generator
-        function createParticles() {
-            const particleCount = 12;
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                const size = Math.random() * 5 + 2;
-                const leftPos = Math.random() * 100;
-                const animDuration = Math.random() * 6 + 4;
-                const animDelay = Math.random() * 5;
-
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${leftPos}%`;
-                particle.style.animationDuration = `${animDuration}s`;
-                particle.style.animationDelay = `${animDelay}s`;
-
-                container.appendChild(particle);
+        function loopTyping() {
+            if (!isDeleting) {
+                // Forward typing animation
+                if (charIndex <= plainText.length) {
+                    if (charIndex <= 4) {
+                        textTarget.innerHTML = plainText.substring(0, charIndex);
+                    } else {
+                        textTarget.innerHTML = 'Under<span>' + plainText.substring(5, charIndex) + '</span>';
+                    }
+                    charIndex++;
+                    setTimeout(loopTyping, typingSpeed);
+                } else {
+                    // Fully typed out, pause for 5 seconds then switch to deleting state
+                    isDeleting = true;
+                    setTimeout(loopTyping, holdTime);
+                }
+            } else {
+                // Backward backspace animation
+                if (charIndex >= 0) {
+                    if (charIndex <= 4) {
+                        textTarget.innerHTML = plainText.substring(0, charIndex);
+                    } else {
+                        textTarget.innerHTML = 'Under<span>' + plainText.substring(5, charIndex) + '</span>';
+                    }
+                    charIndex--;
+                    setTimeout(loopTyping, deletingSpeed);
+                } else {
+                    // Fully backspaced, reset states and restart typing loop
+                    isDeleting = false;
+                    charIndex = 0;
+                    setTimeout(loopTyping, 400);
+                }
             }
         }
-        createParticles();
 
-        // Form Submission Interactive Feedback
-        const notifyForm = document.getElementById('notifyForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const emailInput = document.getElementById('emailInput');
-
-        notifyForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (!emailInput.value) return;
-
-            submitBtn.textContent = '✨ Subscribed!';
-            submitBtn.style.background = '#10b981';
-            submitBtn.style.boxShadow = '0 4px 20px rgba(16, 185, 129, 0.5)';
-            emailInput.value = '';
-            emailInput.disabled = true;
-
-            setTimeout(() => {
-                submitBtn.textContent = 'Notify Me';
-                submitBtn.style.background = '#6366f1';
-                submitBtn.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.4)';
-                emailInput.disabled = false;
-            }, 4000);
-        });
+        // Start loop on load
+        setTimeout(loopTyping, 600);
     </script>
 </body>
 </html>
