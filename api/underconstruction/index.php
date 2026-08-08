@@ -20,7 +20,7 @@ require_once __DIR__ . '/../router.php';
 </head>
 <body>
 
-<?php include 'global/header.php'; ?>
+<?php include '../global/header.php'; ?>
 <section class="banner" id="interactiveBanner">
     <div class="main=box">
     <div class="bounding-box-wrapper" id="boundingBox">
