@@ -16,10 +16,6 @@
     {
       "source": "/images/(.*)",
       "destination": "/public/images/$1"
-    },
-    {
-      "source": "/((?!public/).*)",
-      "destination": "/api/index.php"
     }
   ]
 }
