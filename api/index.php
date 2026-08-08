@@ -111,7 +111,7 @@
         </div>
 
         <!-- Contact Form (Tied to PHP backend) -->
-        <form class="contact-form" action="../api/mail.php" method="post">
+        <form class="contact-form" action="mail.php" method="post">
             <div class="form-group">
                 <input type="text" name="name" placeholder="Your Name" required>
             </div>
