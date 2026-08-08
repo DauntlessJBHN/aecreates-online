@@ -1,9 +1,8 @@
 <?php
 // Call the separate router file
-require_once __DIR__ . '/../router.php';
+require __DIR__ . '/../router.php';
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -20,7 +19,8 @@ require_once __DIR__ . '/../router.php';
 </head>
 <body>
 
-<?php include '../global/header.php'; ?>
+<?php include __DIR__ . '/../global/header.php'; ?>
+
 <section class="banner" id="interactiveBanner">
     <div class="main=box">
     <div class="bounding-box-wrapper" id="boundingBox">

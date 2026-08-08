@@ -37,7 +37,7 @@ if (isset($_POST["send"])) {
     $mail->Body    = $_POST["message"]; //email message
 
     // Success sent message alert
-    $mail->send();
+    //$mail->send();
 $is_local = ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.0.0.1');
 
 if ($is_local) {
