@@ -19,6 +19,13 @@ require_once __DIR__ . '/../router.php';
 </head>
 <body>
 
+<div id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <div class="loader-text">Building Portfolio...</div>
+        </div>
+    </div>
+
 <?php include __DIR__ . '/../global/header.php'; ?>
 
 <section class="banner" id="interactiveBanner">
@@ -92,5 +99,6 @@ require_once __DIR__ . '/../router.php';
     <footer>
         <p>&copy; 2026 Aecreates Graphic Design Portfolio. All rights reserved.</p>
     </footer>
+    <script src="<?php echo $asset_base; ?>/js/script.js"></script>
 </body>
 </html>
