@@ -37,7 +37,7 @@ if (isset($_POST["send"])) {
     $mail->Body    = $_POST["message"]; //email message
 
     // Success sent message alert
-    $mail->send();
+    //$mail->send();
     echo
     " 
     <script> 
