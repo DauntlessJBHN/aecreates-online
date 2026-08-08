@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Draggable Stickers (Fixed Double Tab)</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f4f8;
+            height: 100vh;
+            font-family: sans-serif;
+        }
+
+        .sticker {
+            position: absolute;
+            width: 150px; 
+            cursor: grab;
+            z-index: 1000;
+            
+            user-select: none;
+            -webkit-user-select: none;
+            
+            /* Modern fix to prevent mobile scrolling while dragging */
+            touch-action: none; 
+            
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
+            transition: transform 0.1s;
+        }
+
+        .sticker:active {
+            cursor: grabbing;
+            transform: scale(1.05); 
+        }
+
+        .sticker img {
+            width: 100%;
+            height: auto;
+            pointer-events: none; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sticker" data-link="https://www.google.com" style="top: 50px; left: 50px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/256px-React-icon.svg.png" alt="React Sticker">
+    </div>
+
+    <div class="sticker" data-link="https://www.wikipedia.org" style="top: 150px; left: 300px; width: 120px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/256px-CSS3_logo_and_wordmark.svg.png" alt="CSS3 Sticker">
+    </div>
+
+    <div class="sticker" data-link="https://www.github.com" style="top: 300px; left: 100px; width: 130px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/256px-HTML5_logo_and_wordmark.svg.png" alt="HTML5 Sticker">
+    </div>
+
+    <script>
+        const stickers = document.querySelectorAll('.sticker');
+        
+        let activeSticker = null; 
+        let highestZIndex = 1000; 
+
+        let startX, startY;
+        let initialMouseX, initialMouseY;
+
+        const onDragStart = (e) => {
+            // Ignore right-clicks
+            if (e.pointerType === 'mouse' && e.button !== 0) return;
+            
+            e.preventDefault();
+
+            activeSticker = e.currentTarget;
+            
+            highestZIndex++;
+            activeSticker.style.zIndex = highestZIndex;
+
+            // Pointer events use clientX/clientY directly for both touch and mouse
+            initialMouseX = e.clientX;
+            initialMouseY = e.clientY;
+
+            const rect = activeSticker.getBoundingClientRect();
+            startX = rect.left;
+            startY = rect.top;
+        };
+
+        const onDragMove = (e) => {
+            if (!activeSticker) return;
+
+            const dx = e.clientX - initialMouseX;
+            const dy = e.clientY - initialMouseY;
+
+            let newLeft = startX + dx;
+            let newTop = startY + dy;
+
+            const maxLeft = window.innerWidth - activeSticker.offsetWidth;
+            const maxTop = window.innerHeight - activeSticker.offsetHeight;
+
+            newLeft = Math.max(0, Math.min(newLeft, maxLeft));
+            newTop = Math.max(0, Math.min(newTop, maxTop));
+
+            activeSticker.style.left = `${newLeft}px`;
+            activeSticker.style.top = `${newTop}px`;
+        };
+
+        const onDragEnd = (e) => {
+            if (!activeSticker) return;
+
+            const distanceMoved = Math.sqrt(
+                Math.pow(e.clientX - initialMouseX, 2) +
+                Math.pow(e.clientY - initialMouseY, 2)
+            );
+
+            if (distanceMoved < 5) {
+                const targetUrl = activeSticker.getAttribute('data-link');
+                if (targetUrl) {
+                    window.open(targetUrl, '_blank');
+                }
+            }
+
+            // Clean up the active sticker so it doesn't double-fire
+            activeSticker = null;
+        };
+
+        // Replaced old touch/mouse events with modern Pointer Events
+        stickers.forEach(sticker => {
+            sticker.addEventListener('pointerdown', onDragStart);
+        });
+
+        document.addEventListener('pointermove', onDragMove);
+        document.addEventListener('pointerup', onDragEnd);
+        document.addEventListener('pointercancel', onDragEnd);
+
+    </script>
+</body>
+</html>
