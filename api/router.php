@@ -1,19 +1,28 @@
 <?php
+
 $is_local = ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.0.0.1');
-$base_url = $is_local ? '/aecreates.online/public' : '';
+$base_url = $is_local ? '/aecreates.online' : '';
 
 $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Strip local folder prefix if testing locally
+// 1. If testing locally, strip the project folder name (/aecreates.online) from the request
+if ($is_local) {
+    $request = str_replace('/aecreates.online', '', $request);
+}
+
+// 2. Fallback check for any other script name variations
 $script_name = dirname($_SERVER['SCRIPT_NAME']);
 if ($script_name !== '/' && strpos($request, $script_name) === 0) {
     $request = substr($request, strlen($script_name));
 }
 
+// 3. Clean up trailing slashes and empty roots
 $request = rtrim($request, '/');
 if ($request === '' || $request === '/api') {
     $request = '/';
 }
+
+// (Now your switch($request) will correctly match '/', '/underconstruction', etc.)
 
 ob_start();
 
@@ -55,7 +64,7 @@ switch ($request) {
         exit; // Crucial: stops execution here
 
     case '/header':
-        $file = __DIR__ . '/globalheader.php';
+        $file = __DIR__ . '/global/header.php';
         if (file_exists($file)) {
             include $file;
         } else {
@@ -71,4 +80,6 @@ switch ($request) {
 
 // Capture only the matched page content
 $page_content = ob_get_clean();
+
+
 ?>
