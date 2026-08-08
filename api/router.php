@@ -1,7 +1,12 @@
 <?php
 
 $is_local = ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.0.0.1');
+
+// Base URL for your navigation/links (no /public)
 $base_url = $is_local ? '/aecreates.online' : '';
+
+// Asset base specifically for CSS, JS, and Images (includes /public only on local)
+$asset_base = $is_local ? '/aecreates.online/public' : '';
 
 $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
