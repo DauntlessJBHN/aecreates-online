@@ -38,11 +38,22 @@ if (isset($_POST["send"])) {
 
     // Success sent message alert
     $mail->send();
-    echo
-    " 
-    <script> 
-     document.location.href = 'confirmation';
-    </script>
-    ";
+
+    $is_local = ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.0.0.1');
+
+    if ($is_local) {
+        // Point directly to the physical file location on XAMPP
+        header("Location: /aecreates.online/api/confirmation/");
+    } else {
+        // Clean route for Vercel production
+        header("Location: /confirmation");
+    }
+    exit();
+    //echo
+    //" 
+    //<script> 
+    // document.location.href = 'confirmation';
+    //</script>
+    //";
 }
 ?>
