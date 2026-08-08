@@ -45,6 +45,15 @@ switch ($request) {
         }
         exit; // Crucial: stops execution here
 
+    case '/mail':
+        $file = __DIR__ . '/mail.php';
+        if (file_exists($file)) {
+            include $file;
+        } else {
+            echo "Confirmation file not found.";
+        }
+        exit; // Crucial: stops execution here
+
     default:
         http_response_code(404);
         echo "<h1>404 Page Not Found</h1>";

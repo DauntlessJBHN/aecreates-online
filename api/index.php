@@ -117,7 +117,7 @@ require_once __DIR__ . '/router.php';
         </div>
 
         <!-- Contact Form (Tied to PHP backend) -->
-        <form class="contact-form" action="mail.php" method="post">
+        <form class="contact-form" action="mail" method="post">
             <div class="form-group">
                 <input type="text" name="name" placeholder="Your Name" required>
             </div>
