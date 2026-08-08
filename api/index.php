@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aecreates</title>
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/jpeg" href="../images/aecreates.png">   
+    <link rel="icon" type="image/jpeg" href="../public/images/aecreates.png">   
 </head>
 
 <body> 
-
-    <div id="loader">
-        <div class="loader-content">
-            <div class="spinner"></div>
-            <div class="loader-text">Sending message...</div>
-        </div>
-    </div>
-
-    <?php include '../global/header.php'; ?>
+    <header>
+        <a href="#" class="logo"><span>aecreates</span>.online</a>
+        <nav>
+            <ul>
+                <li><a href="#banner">Home</a></li>
+                <li><a href="#portfolio">Works</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <section class="banner" id="interactiveBanner">
         <!-- MAIN TITLE -->
@@ -44,7 +45,7 @@
 
     <script>
         const textTarget = document.getElementById('typedText');
-        const plainText = 'Thank you';
+        const plainText = 'Aecreates';
         
         let charIndex = 0;
         let isDeleting = false;
@@ -56,10 +57,10 @@
             if (!isDeleting) {
                 // Forward typing animation
                 if (charIndex <= plainText.length) {
-                    if (charIndex <= 5) {
+                    if (charIndex <= 2) {
                         textTarget.innerHTML = plainText.substring(0, charIndex);
                     } else {
-                        textTarget.innerHTML = 'Thank<span>' + plainText.substring(5, charIndex) + '</span>';
+                        textTarget.innerHTML = 'Ae<span>' + plainText.substring(2, charIndex) + '</span>';
                     }
                     charIndex++;
                     setTimeout(loopTyping, typingSpeed);
@@ -71,10 +72,10 @@
             } else {
                 // Backward backspace animation
                 if (charIndex >= 0) {
-                    if (charIndex <= 5) {
+                    if (charIndex <= 2) {
                         textTarget.innerHTML = plainText.substring(0, charIndex);
                     } else {
-                        textTarget.innerHTML = 'Thank<span>' + plainText.substring(5, charIndex) + '</span>';
+                        textTarget.innerHTML = 'Ae<span>' + plainText.substring(2, charIndex) + '</span>';
                     }
                     charIndex--;
                     setTimeout(loopTyping, deletingSpeed);
@@ -93,8 +94,35 @@
 
     <!-- END OF MAIN TITLE -->
     </div>
-    <p>We have received your email. Expect a reply from us within the day to discuss your inquiry. Kindly check your email (spam messages). For the meantime, you can reach out to us through our Facebook page.</p>
-    <a href="https://www.facebook.com/aecreates.by.ae" target="_blank" class="btn-primary">Aecreates Facebook Page</a>
+    <p>Let us turn ideas into visual experiences that connect, communicate, and <b style="color: #2cbae2;">stand out</b>.</p>
+    <a href="../api/underconstruction/" class="btn-primary">Explore Works</a>
+    </section>
+
+
+    <!-- Social Media & Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">Let's Work <span>Together</span></h2>
+        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 1.5rem auto;">Have a project in mind or just want to chat? <br> Reach out through my social channels or drop a message below.</p>
+        
+        <!-- Social Media Links -->
+        <div class="social-links">
+            <a href="https://behance.net" target="_blank" class="btn-primary">Facebook</a>
+            <a href="https://linkedin.com" target="_blank" class="btn-primary">LinkedIn</a>
+        </div>
+
+        <!-- Contact Form (Tied to PHP backend) -->
+        <form class="contact-form" action="../api/mail.php" method="post">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Your Email Address" required>
+            </div>
+            <div class="form-group">
+                <textarea name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <input type="submit" name="send" value="Send Message" class="btn-primary" style="width: 100%; border-radius: 12px; cursor: pointer;">
+        </form>
     </section>
 
     
@@ -102,7 +130,8 @@
         <p>&copy; 2026 Aecreates Graphic Design Portfolio. All rights reserved.</p>
     </footer>
 
-    <script src="../script.js"></script>
+
+    <script src="../public/js/script.js"></script>
 </body>
 
 </html>
