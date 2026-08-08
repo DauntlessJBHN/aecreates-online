@@ -1,6 +1,6 @@
 <?php
 // Call the separate router file
-require __DIR__ . '/../router.php';
+require_once __DIR__ . '/../router.php';
 
 ?>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@ require __DIR__ . '/../router.php';
 </head>
 <body>
 
-<?php include __DIR__ . '/../global/header.php'; ?>
+<?php include '../global/header.php'; ?>
 
 <section class="banner" id="interactiveBanner">
     <div class="main=box">

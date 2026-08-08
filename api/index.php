@@ -101,7 +101,7 @@ require_once __DIR__ . '/router.php';
     <!-- END OF MAIN TITLE -->
     </div>
     <p>Let us turn ideas into visual experiences that connect, communicate, and <b style="color: #2cbae2;">stand out</b>.</p>
-    <a href="underconstruction/" class="btn-primary">Explore Works</a>
+    <a href="underconstruction" class="btn-primary">Explore Works</a>
     </section>
 
 
