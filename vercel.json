@@ -4,14 +4,22 @@
       "runtime": "vercel-php@0.9.0"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico))",
-      "dest": "/public/$1"
+      "source": "/css/(.*)",
+      "destination": "/public/css/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/api/underconstruction/index.php"
+      "source": "/js/(.*)",
+      "destination": "/public/js/$1"
+    },
+    {
+      "source": "/images/(.*)",
+      "destination": "/public/images/$1"
+    },
+    {
+      "source": "/((?!public/).*)",
+      "destination": "/api/index.php"
     }
   ]
 }
