@@ -136,8 +136,6 @@ require_once __DIR__ . '/router.php';
         <p>&copy; 2026 Aecreates Graphic Design Portfolio. All rights reserved.</p>
     </footer>
 
-
-    <script src="../public/js/script.js"></script>
 </body>
 
 </html>
