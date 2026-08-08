@@ -15,7 +15,17 @@ if ($request === '' || $request === '/api') {
     $request = '/';
 }
 
+ob_start();
+
 switch ($request) {
+    case '/':
+        $file = __DIR__ . '/home/index.php'; // Put your home view inside a dedicated file
+        if (file_exists($file)) {
+            include $file;
+        } else {
+            echo "Home page file not found.";
+        }
+        break; // Crucial: stops execution here so it doesn't bleed into other cases
 
     case '/underconstruction':
         $file = __DIR__ . '/underconstruction/index.php';
@@ -24,7 +34,7 @@ switch ($request) {
         } else {
             echo "Under Construction file not found.";
         }
-        break;
+        break; // Crucial: stops execution here
 
     case '/confirmation':
         $file = __DIR__ . '/confirmation/index.php';
@@ -33,10 +43,14 @@ switch ($request) {
         } else {
             echo "Confirmation file not found.";
         }
-        break;
+        break; // Crucial: stops execution here
 
     default:
         http_response_code(404);
+        echo "<h1>404 Page Not Found</h1>";
         break;
 }
+
+// Capture only the matched page content
+$page_content = ob_get_clean();
 ?>
