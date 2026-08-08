@@ -54,6 +54,15 @@ switch ($request) {
         }
         exit; // Crucial: stops execution here
 
+    case '/header':
+        $file = __DIR__ . '/globalheader.php';
+        if (file_exists($file)) {
+            include $file;
+        } else {
+            echo "Confirmation file not found.";
+        }
+        exit; // Crucial: stops execution here
+
     default:
         http_response_code(404);
         echo "<h1>404 Page Not Found</h1>";

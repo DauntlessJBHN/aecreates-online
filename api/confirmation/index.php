@@ -28,6 +28,8 @@ require_once __DIR__ . '/../router.php';
         </div>
     </div>
 
+    <?php include 'header'; ?>
+
     <section class="banner" id="interactiveBanner">
         <!-- MAIN TITLE -->
          

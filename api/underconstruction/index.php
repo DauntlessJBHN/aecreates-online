@@ -19,6 +19,8 @@ require_once __DIR__ . '/../router.php';
 </head>
 <body>
 
+<?php include 'header'; ?>
+
 <section class="banner" id="interactiveBanner">
     <div class="main=box">
     <div class="bounding-box-wrapper" id="boundingBox">
