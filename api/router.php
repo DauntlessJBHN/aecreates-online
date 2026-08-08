@@ -19,7 +19,7 @@ ob_start();
 
 switch ($request) {
     case '/':
-        $file = __DIR__ . '/home/index.php'; // Put your home view inside a dedicated file
+        $file = __DIR__ . '/index.php'; // Put your home view inside a dedicated file
         if (file_exists($file)) {
             include $file;
         } else {
