@@ -31,7 +31,7 @@ require_once __DIR__ . '/router.php';
         </nav>
     </header>
 
-    <section class="banner" id="interactiveBanner">
+    <section class="banner" id="banner">
         <!-- MAIN TITLE -->
          
     <div class="main=box">
