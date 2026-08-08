@@ -28,7 +28,7 @@ require_once __DIR__ . '/../router.php';
         </div>
     </div>
 
-    <?php include 'global/header.php'; ?>
+    <?php include __DIR__ . '/../global/header.php'; ?>
 
     <section class="banner" id="interactiveBanner">
         <!-- MAIN TITLE -->
