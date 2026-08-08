@@ -41,7 +41,7 @@ if (isset($_POST["send"])) {
 $is_local = ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.0.0.1');
 
 if ($is_local) {
-    $redirect_url = "/aecreates.online/api/confirmation";
+    $redirect_url = "/aecreates.online/confirmation";
 } else {
     $redirect_url = "/confirmation";
 }
@@ -50,14 +50,12 @@ if ($is_local) {
     // Error notification alert
     $error_msg = addslashes($mail->ErrorInfo);
     echo "<script>
-            alert('Mailer Error: " . $error_msg . "');
             window.location.href = '" . $redirect_url . "';
           </script>";
     exit();
       } else {
           // Success notification alert
           echo "<script>
-                  alert('Message sent successfully!');
                   window.location.href = '" . $redirect_url . "';
                 </script>";
           exit();
