@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Banner Gallery - Bento Layout</title>
+    <title>Portfolio Banner Gallery with Smooth Transitions</title>
     <style>
         :root {
             --bg-color: #0d0d0d;
@@ -40,7 +40,7 @@
 
         .gallery-header {
             text-align: center;
-            margin-bottom: 3.5rem;
+            margin-bottom: 2rem;
         }
 
         .gallery-header h1 {
@@ -58,46 +58,97 @@
             font-size: 1.1rem;
         }
 
-        /* Asymmetrical Bento Grid Layout for 5 Landscape Works */
+        /* Category Filter Bar */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s var(--transition);
+        }
+
+        .filter-btn:hover {
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background-color: var(--text-primary);
+            color: var(--bg-color);
+            border-color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Equal Size Grid Layout */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: repeat(1, 1fr);
             gap: 1.5rem;
             width: 100%;
             max-width: 1300px;
         }
 
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Cool Transition Animation Setup for Grid Items */
         .gallery-item {
             position: relative;
             background-color: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
+            height: 380px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
+            
+            /* Transition properties for smooth filtering */
+            opacity: 1;
+            transform: scale(1);
+            visibility: visible;
+            transition: opacity 0.5s var(--transition), 
+                        transform 0.5s var(--transition), 
+                        visibility 0.5s var(--transition), 
+                        box-shadow 0.4s var(--transition);
         }
 
-        /* Custom Asymmetrical Spans & Heights (All Landscape) */
-        .item-1 { grid-column: span 12; height: 400px; }
-        .item-2 { grid-column: span 12; height: 300px; }
-        .item-3 { grid-column: span 12; height: 300px; }
-        .item-4 { grid-column: span 12; height: 350px; }
-        .item-5 { grid-column: span 12; height: 350px; }
-
-        @media (min-width: 768px) {
-            .item-1 { grid-column: span 12; height: 460px; }
-            .item-2 { grid-column: span 6; height: 340px; }
-            .item-3 { grid-column: span 6; height: 340px; }
-            .item-4 { grid-column: span 7; height: 380px; }
-            .item-5 { grid-column: span 5; height: 380px; }
-        }
-
-        @media (min-width: 1024px) {
-            .item-1 { grid-column: span 8; height: 480px; }
-            .item-2 { grid-column: span 4; height: 480px; }
-            .item-3 { grid-column: span 4; height: 360px; }
-            .item-4 { grid-column: span 4; height: 360px; }
-            .item-5 { grid-column: span 4; height: 360px; }
+        /* State when an item is filtered out */
+        .gallery-item.hide {
+            opacity: 0;
+            transform: scale(0.85);
+            visibility: hidden;
+            pointer-events: none;
+            /* Collapse height/margins seamlessly if preferred, 
+               or let it absolute fade out. Using absolute positioning tricks 
+               or simple scale/opacity works best with CSS grids. */
+            position: absolute;
+            width: 0;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: none;
+            overflow: hidden;
         }
 
         .gallery-item img {
@@ -135,7 +186,6 @@
 
         .gallery-item:hover {
             box-shadow: 0 20px 40px rgba(255, 51, 102, 0.15);
-            transform: translateY(-4px);
         }
 
         .project-category {
@@ -153,7 +203,7 @@
             color: #fff;
         }
 
-        /* Lightbox Modal Component */
+        /* Lightbox Modal Component with Smooth Pop-in */
         .lightbox-modal {
             position: fixed;
             top: 0;
@@ -197,7 +247,7 @@
 
         .lightbox-image-container {
             width: 100%;
-            height: 420px;
+            height: 450px;
             overflow: hidden;
         }
 
@@ -268,73 +318,58 @@
     <section class="banner-gallery-section">
         <div class="gallery-header">
             <h1>Featured Works</h1>
-            <p>Highlighting core brand identities, design systems, and key creative pieces.</p>
+            <p>Selected brand identities, visual systems, and creative design initiatives.</p>
         </div>
 
-        <!-- 5-Work Asymmetrical Landscape Bento Grid -->
+        <!-- Category Filter Buttons -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All Works</button>
+            <button class="filter-btn" data-filter="visual-design">Visual Design</button>
+            <button class="filter-btn" data-filter="product-styling">Product Styling</button>
+            <button class="filter-btn" data-filter="digital-media">Digital Media</button>
+        </div>
+
+        <!-- Gallery Grid -->
         <div class="gallery-grid">
-            <!-- Work 1 (Hero Large Landscape) -->
-            <div class="gallery-item item-1" 
-                 data-title="Flagship Brand Identity" 
-                 data-category="Brand Strategy & Visual System" 
-                 data-description="A detailed overview of the core brand system, typography hierarchy, and collateral assets designed for maximum market impact."
+            <!-- Item 1 -->
+            <div class="gallery-item" 
+                 data-category="visual-design"
+                 data-title="Brand Identity System" 
+                 data-desc-category="Visual Design & Branding" 
+                 data-description="A comprehensive corporate identity project featuring modern typography systems, dynamic packaging, and high-impact visual layouts."
                  data-img="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" alt="Flagship Brand Identity">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" alt="Brand Identity">
                 <div class="gallery-overlay">
-                    <span class="project-category">Brand System</span>
-                    <h3 class="project-title">Flagship Brand Identity</h3>
+                    <span class="project-category">Visual Design</span>
+                    <h3 class="project-title">Brand Identity System</h3>
                 </div>
             </div>
 
-            <!-- Work 2 -->
-            <div class="gallery-item item-2" 
-                 data-title="Artisan Product Packaging" 
-                 data-category="Merchandise & Labeling" 
-                 data-description="Custom structural styling and sophisticated label design curated for high-end consumer goods and local artisan showcases."
+            <!-- Item 2 -->
+            <div class="gallery-item" 
+                 data-category="product-styling"
+                 data-title="Artisan Packaging & Labeling" 
+                 data-desc-category="Product Styling" 
+                 data-description="Custom aesthetic merchandise and product label design tailored for upscale consumer goods and artisan markets."
                  data-img="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" alt="Artisan Product Packaging">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" alt="Packaging">
                 <div class="gallery-overlay">
                     <span class="project-category">Product Styling</span>
-                    <h3 class="project-title">Artisan Product Packaging</h3>
+                    <h3 class="project-title">Artisan Packaging</h3>
                 </div>
             </div>
 
-            <!-- Work 3 -->
-            <div class="gallery-item item-3" 
+            <!-- Item 3 -->
+            <div class="gallery-item" 
+                 data-category="digital-media"
                  data-title="Digital Experience & UI Kit" 
-                 data-category="Digital Media" 
+                 data-desc-category="Digital Media" 
                  data-description="Futuristic layout concepts and digital UI branding assets designed for modern interactive web platforms."
                  data-img="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop" alt="Digital Experience">
                 <div class="gallery-overlay">
                     <span class="project-category">Digital Media</span>
                     <h3 class="project-title">Digital Experience</h3>
-                </div>
-            </div>
-
-            <!-- Work 4 -->
-            <div class="gallery-item item-4" 
-                 data-title="Editorial & Print Layout" 
-                 data-category="Print Media" 
-                 data-description="Precision-crafted grid layouts and typography systems for high-end editorial publications and collateral."
-                 data-img="https://images.unsplash.com/photo-1542744094-24638eff58bb?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?q=80&w=1200&auto=format&fit=crop" alt="Editorial Layout">
-                <div class="gallery-overlay">
-                    <span class="project-category">Print Media</span>
-                    <h3 class="project-title">Editorial & Print Layout</h3>
-                </div>
-            </div>
-
-            <!-- Work 5 -->
-            <div class="gallery-item item-5" 
-                 data-title="Motion & Key Visuals" 
-                 data-category="Creative Direction" 
-                 data-description="Dynamic promotional graphics, campaign key art, and visual identity extensions for large-scale creative initiatives."
-                 data-img="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop" alt="Motion & Key Visuals">
-                <div class="gallery-overlay">
-                    <span class="project-category">Creative Direction</span>
-                    <h3 class="project-title">Motion & Key Visuals</h3>
                 </div>
             </div>
         </div>
@@ -357,7 +392,29 @@
     </div>
 
     <script>
+        // Smooth Filtering Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
         const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (filterValue === 'all' || itemCategory === filterValue) {
+                        item.classList.remove('hide');
+                    } else {
+                        item.classList.add('hide');
+                    }
+                });
+            });
+        });
+
+        // Lightbox Logic
         const modal = document.getElementById('lightboxModal');
         const closeModal = document.getElementById('closeModal');
         
@@ -368,8 +425,11 @@
 
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
+                // Prevent click processing if hidden
+                if (item.classList.contains('hide')) return;
+
                 const title = item.getAttribute('data-title');
-                const category = item.getAttribute('data-category');
+                const category = item.getAttribute('data-desc-category');
                 const desc = item.getAttribute('data-description');
                 const imgSrc = item.getAttribute('data-img');
 

@@ -40,3 +40,48 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const modal = document.getElementById('lightboxModal');
+        const closeModal = document.getElementById('closeModal');
+        
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalDesc = document.getElementById('modalDesc');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const title = item.getAttribute('data-title');
+                const category = item.getAttribute('data-category');
+                const desc = item.getAttribute('data-description');
+                const imgSrc = item.getAttribute('data-img');
+
+                modalTitle.textContent = title;
+                modalCategory.textContent = category;
+                modalDesc.textContent = desc;
+                modalImg.src = imgSrc;
+
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeLightbox = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
+        closeModal.addEventListener('click', closeLightbox);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeLightbox();
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
