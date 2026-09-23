@@ -373,8 +373,9 @@
                  data-title="Motion & Key Visuals" 
                  data-category="Creative Direction" 
                  data-description="Dynamic promotional graphics, campaign key art, and visual identity extensions for large-scale creative initiatives."
-                 data-img="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop" alt="Motion & Key Visuals">
+                 data-img="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop"
+                data-link="projects/brand-identity.html">
+                 <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop" alt="Motion & Key Visuals">
                 <div class="gallery-overlay">
                     <span class="project-category">Creative Direction</span>
                     <h3 class="project-title">Motion & Key Visuals</h3>
@@ -418,6 +419,7 @@
         const modalTitle = document.getElementById('modalTitle');
         const modalCategory = document.getElementById('modalCategory');
         const modalDesc = document.getElementById('modalDesc');
+        const modalLink = document.getElementById('modalLink'); // <-- 1. Select the modal button
 
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
@@ -425,11 +427,13 @@
                 const category = item.getAttribute('data-category');
                 const desc = item.getAttribute('data-description');
                 const imgSrc = item.getAttribute('data-img');
+                const projectUrl = item.getAttribute('data-link'); // <-- 2. Read the specific link
 
                 modalTitle.textContent = title;
                 modalCategory.textContent = category;
                 modalDesc.textContent = desc;
                 modalImg.src = imgSrc;
+                modalLink.href = projectUrl; // <-- 3. Dynamically set the button's href
 
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';

@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const modalTitle = document.getElementById('modalTitle');
         const modalCategory = document.getElementById('modalCategory');
         const modalDesc = document.getElementById('modalDesc');
+        const modalLink = document.getElementById('modalLink'); // <-- 1. Select the modal button
 
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
@@ -56,11 +57,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 const category = item.getAttribute('data-category');
                 const desc = item.getAttribute('data-description');
                 const imgSrc = item.getAttribute('data-img');
+                const projectUrl = item.getAttribute('data-link'); // <-- 2. Read the specific link
 
                 modalTitle.textContent = title;
                 modalCategory.textContent = category;
                 modalDesc.textContent = desc;
                 modalImg.src = imgSrc;
+                modalLink.href = projectUrl; // <-- 3. Dynamically set the button's href
 
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';

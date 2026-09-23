@@ -120,14 +120,15 @@ require_once __DIR__ . '/router.php';
         <div class="gallery-grid">
             <!-- Work 1 (Hero Large Landscape) -->
             <div class="gallery-item item-1" 
-                 data-title="Likha ni El: Arts and Crafts Store" 
+                 data-title="Likha ni El" 
                  data-category="Business Visual Identity" 
-                 data-description="Likha ni El is a thoughtful visual identity project that blends artisanal craftsmanship with modern digital aesthetics through a cohesive logo, color palette, and social media system. Every branding element was meticulously crafted to elevate the client experience and establish a distinctive, authentic presence in the market."
-                 data-img="<?php echo $asset_base; ?>/images/portfolio/likha ni el/Banner Page.png">
-                <img src="<?php echo $asset_base; ?>/images/portfolio/likha ni el/Banner Page.png" alt="Likha ni El: Arts and Crafts Store">
+                 data-description="Likha ni El is an arts and crafts store whose visual identity and cohesive branding elevate its handcrafted creations with a warm, modern aesthetic."
+                 data-img="<?php echo $asset_base; ?>/images/portfolio/likha ni el/Banner Page.png"
+                 data-link="underconstruction">
+                <img src="<?php echo $asset_base; ?>/images/portfolio/likha ni el/Banner Page.png" alt="Likha ni El">
                 <div class="gallery-overlay">
                     <span class="project-category">Business Visual Identity</span>
-                    <h3 class="project-title">Likha ni El: Arts and Crafts Store</h3>
+                    <h3 class="project-title">Likha ni El</h3>
                 </div>
             </div>
 
@@ -136,7 +137,8 @@ require_once __DIR__ . '/router.php';
                  data-title="Society of Petroleum Engineering AY 2025-2026" 
                  data-category="Social Media Branding & Campaigns" 
                  data-description="Custom structural styling and sophisticated label design curated for high-end consumer goods and local artisan showcases."
-                 data-img="<?php echo $asset_base; ?>/images/portfolio/spe/Banner Page.png">
+                 data-img="<?php echo $asset_base; ?>/images/portfolio/spe/Banner Page.png"
+                 data-link="underconstruction">
                 <img src="<?php echo $asset_base; ?>/images/portfolio/spe/Banner Page.png" alt="Society of Petroleum Engineering AY 2025-2026">
                 <div class="gallery-overlay">
                     <span class="project-category">Social Media Branding & Campaigns</span>
@@ -149,7 +151,8 @@ require_once __DIR__ . '/router.php';
                  data-title="FUEL'D: Merch Line" 
                  data-category="Merchandise Design" 
                  data-description="Futuristic layout concepts and digital UI branding assets designed for modern interactive web platforms."
-                 data-img="<?php echo $asset_base; ?>/images/portfolio/fueld/Banner Page.png">
+                 data-img="<?php echo $asset_base; ?>/images/portfolio/fueld/Banner Page.png"
+                 data-link="underconstruction">
                 <img src="<?php echo $asset_base; ?>/images/portfolio/fueld/Banner Page.png" alt="FUEL'D: Merch Line">
                 <div class="gallery-overlay">
                     <span class="project-category">Merchandise Design</span>
@@ -159,27 +162,29 @@ require_once __DIR__ . '/router.php';
 
             <!-- Work 4 -->
             <div class="gallery-item item-4" 
-                 data-title="Editorial & Print Layout" 
-                 data-category="Print Media" 
+                 data-title="CALQ by Engr. Guides" 
+                 data-category="Product Photography" 
                  data-description="Precision-crafted grid layouts and typography systems for high-end editorial publications and collateral."
-                 data-img="https://images.unsplash.com/photo-1542744094-24638eff58bb?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?q=80&w=1200&auto=format&fit=crop" alt="Editorial Layout">
+                 data-img="<?php echo $asset_base; ?>/images/portfolio/calq/Banner Page.png"
+                 data-link="underconstruction">
+                <img src="<?php echo $asset_base; ?>/images/portfolio/calq/Banner Page.png" alt="CALQ by Engr. Guides">
                 <div class="gallery-overlay">
-                    <span class="project-category">Print Media</span>
-                    <h3 class="project-title">Editorial & Print Layout</h3>
+                    <span class="project-category">Product Photography</span>
+                    <h3 class="project-title">CALQ by Engr. Guides</h3>
                 </div>
             </div>
 
             <!-- Work 5 -->
             <div class="gallery-item item-5" 
-                 data-title="Motion & Key Visuals" 
-                 data-category="Creative Direction" 
+                 data-title="2026 PAPSAS Midyear Interactive Youth Forum" 
+                 data-category="Event Branding and Collaterals" 
                  data-description="Dynamic promotional graphics, campaign key art, and visual identity extensions for large-scale creative initiatives."
-                 data-img="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop" alt="Motion & Key Visuals">
+                 data-img="<?php echo $asset_base; ?>/images/portfolio/2026 midyear/Banner Page.png"
+                 data-link="underconstruction">
+                <img src="<?php echo $asset_base; ?>/images/portfolio/2026 midyear/Banner Page.png"" alt="2026 PAPSAS Midyear Interactive Youth Forum">
                 <div class="gallery-overlay">
-                    <span class="project-category">Creative Direction</span>
-                    <h3 class="project-title">Motion & Key Visuals</h3>
+                    <span class="project-category">Event Branding and Collaterals</span>
+                    <h3 class="project-title">2026 PAPSAS Midyear Interactive Youth Forum</h3>
                 </div>
             </div>
         </div>
@@ -196,7 +201,7 @@ require_once __DIR__ . '/router.php';
                 <span class="project-category" id="modalCategory" style="display:block; margin-bottom:0.4rem;">Category</span>
                 <h2 id="modalTitle">Project Title</h2>
                 <p id="modalDesc">Detailed project description goes here.</p>
-                <a href="#" class="view-project-btn" id="modalLink">Explore Full Case Study</a>
+                <a href="#" class="view-project-btn" id="modalLink">Explore Full Project</a>
             </div>
         </div>
     </div>
