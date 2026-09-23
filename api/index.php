@@ -99,55 +99,61 @@ require_once __DIR__ . '/router.php';
     </script>
 
     <!-- END OF MAIN TITLE -->
-    </div>
+    
     <p>Let us turn ideas into visual experiences that connect, communicate, and <b style="color: #2cbae2;">stand out</b>.</p>
-    <a href="underconstruction" class="btn-primary">Explore Works</a>
+    <a href="#portfolio" class="btn-primary">Explore Creations</a>
+    </div>
+    
     </section>
 
-        <section class="banner-gallery-section">
+        <section class="banner-gallery-section" id="portfolio">
         <div class="gallery-header">
-            <h1>Featured Works</h1>
+            <h1>Featured Creations</h1>
             <p>Highlighting core brand identities, design systems, and key creative pieces.</p>
+        </div>
+
+        <div class="gallery-header">
+        <a href="underconstruction" class="btn-primary">View All Creations Archive</a>
         </div>
 
         <!-- 5-Work Asymmetrical Landscape Bento Grid -->
         <div class="gallery-grid">
             <!-- Work 1 (Hero Large Landscape) -->
             <div class="gallery-item item-1" 
-                 data-title="Flagship Brand Identity" 
-                 data-category="Brand Strategy & Visual System" 
-                 data-description="A detailed overview of the core brand system, typography hierarchy, and collateral assets designed for maximum market impact."
-                 data-img="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" alt="Flagship Brand Identity">
+                 data-title="Likha ni El: Arts and Crafts Store" 
+                 data-category="Business Visual Identity" 
+                 data-description="Likha ni El is a thoughtful visual identity project that blends artisanal craftsmanship with modern digital aesthetics through a cohesive logo, color palette, and social media system. Every branding element was meticulously crafted to elevate the client experience and establish a distinctive, authentic presence in the market."
+                 data-img="<?php echo $asset_base; ?>/images/portfolio/likha ni el/Banner Page.png">
+                <img src="<?php echo $asset_base; ?>/images/portfolio/likha ni el/Banner Page.png" alt="Likha ni El: Arts and Crafts Store">
                 <div class="gallery-overlay">
-                    <span class="project-category">Brand System</span>
-                    <h3 class="project-title">Flagship Brand Identity</h3>
+                    <span class="project-category">Business Visual Identity</span>
+                    <h3 class="project-title">Likha ni El: Arts and Crafts Store</h3>
                 </div>
             </div>
 
             <!-- Work 2 -->
             <div class="gallery-item item-2" 
-                 data-title="Artisan Product Packaging" 
-                 data-category="Merchandise & Labeling" 
+                 data-title="Society of Petroleum Engineering AY 2025-2026" 
+                 data-category="Social Media Branding & Campaigns" 
                  data-description="Custom structural styling and sophisticated label design curated for high-end consumer goods and local artisan showcases."
-                 data-img="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" alt="Artisan Product Packaging">
+                 data-img="<?php echo $asset_base; ?>/images/portfolio/spe/Banner Page.png">
+                <img src="<?php echo $asset_base; ?>/images/portfolio/spe/Banner Page.png" alt="Society of Petroleum Engineering AY 2025-2026">
                 <div class="gallery-overlay">
-                    <span class="project-category">Product Styling</span>
-                    <h3 class="project-title">Artisan Product Packaging</h3>
+                    <span class="project-category">Social Media Branding & Campaigns</span>
+                    <h3 class="project-title">Society of Petroleum Engineering AY 2025-2026</h3>
                 </div>
             </div>
 
             <!-- Work 3 -->
             <div class="gallery-item item-3" 
-                 data-title="Digital Experience & UI Kit" 
-                 data-category="Digital Media" 
+                 data-title="FUEL'D: Merch Line" 
+                 data-category="Merchandise Design" 
                  data-description="Futuristic layout concepts and digital UI branding assets designed for modern interactive web platforms."
-                 data-img="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop" alt="Digital Experience">
+                 data-img="<?php echo $asset_base; ?>/images/portfolio/fueld/Banner Page.png">
+                <img src="<?php echo $asset_base; ?>/images/portfolio/fueld/Banner Page.png" alt="FUEL'D: Merch Line">
                 <div class="gallery-overlay">
-                    <span class="project-category">Digital Media</span>
-                    <h3 class="project-title">Digital Experience</h3>
+                    <span class="project-category">Merchandise Design</span>
+                    <h3 class="project-title">FUEL'D: Merch Line</h3>
                 </div>
             </div>
 
@@ -202,8 +208,8 @@ require_once __DIR__ . '/router.php';
         
         <!-- Social Media Links -->
         <div class="social-links">
-            <a href="https://behance.net" target="_blank" class="btn-primary">Facebook</a>
-            <a href="https://linkedin.com" target="_blank" class="btn-primary">LinkedIn</a>
+            <a href="https://facebook.com/aecreates.by.ae" target="_blank" class="btn-primary">Facebook</a>
+            <a href="https://linkedin.com/in/aerolle-sana" target="_blank" class="btn-primary">LinkedIn</a>
         </div>
 
         <!-- Contact Form (Tied to PHP backend) -->

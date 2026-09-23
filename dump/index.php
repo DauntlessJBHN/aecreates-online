@@ -65,6 +65,7 @@
             gap: 1.5rem;
             width: 100%;
             max-width: 1300px;
+            margin-bottom: 3.5rem;
         }
 
         .gallery-item {
@@ -151,6 +152,48 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: #fff;
+        }
+
+        /* View All Works CTA Button Container */
+        .gallery-footer-action {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .view-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.2rem;
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.4s var(--transition);
+        }
+
+        .view-all-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            transition: transform 0.3s var(--transition);
+        }
+
+        .view-all-btn:hover {
+            background-color: var(--text-primary);
+            color: var(--bg-color);
+            border-color: var(--text-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 51, 102, 0.2);
+        }
+
+        .view-all-btn:hover svg {
+            transform: translateX(4px);
         }
 
         /* Lightbox Modal Component */
@@ -337,6 +380,16 @@
                     <h3 class="project-title">Motion & Key Visuals</h3>
                 </div>
             </div>
+        </div>
+
+        <!-- Button to Direct to All Works Page -->
+        <div class="gallery-footer-action">
+            <a href="all-works.html" class="view-all-btn">
+                <span>View All Works Archive</span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
         </div>
     </section>
 
