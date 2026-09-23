@@ -136,7 +136,7 @@ require_once __DIR__ . '/router.php';
             <div class="gallery-item item-2" 
                  data-title="Society of Petroleum Engineering AY 2025-2026" 
                  data-category="Social Media Branding & Campaigns" 
-                 data-description="Custom structural styling and sophisticated label design curated for high-end consumer goods and local artisan showcases."
+                 data-description="A visual identity created to make a mark on the students for the academic year 2025-2026."
                  data-img="<?php echo $asset_base; ?>/images/portfolio/spe/Banner Page.png"
                  data-link="underconstruction">
                 <img src="<?php echo $asset_base; ?>/images/portfolio/spe/Banner Page.png" alt="Society of Petroleum Engineering AY 2025-2026">
@@ -150,7 +150,7 @@ require_once __DIR__ . '/router.php';
             <div class="gallery-item item-3" 
                  data-title="FUEL'D: Merch Line" 
                  data-category="Merchandise Design" 
-                 data-description="Futuristic layout concepts and digital UI branding assets designed for modern interactive web platforms."
+                 data-description="Custom merchandise for the students taking BS Petroleum Engineering to represent their passion for the field."
                  data-img="<?php echo $asset_base; ?>/images/portfolio/fueld/Banner Page.png"
                  data-link="underconstruction">
                 <img src="<?php echo $asset_base; ?>/images/portfolio/fueld/Banner Page.png" alt="FUEL'D: Merch Line">
@@ -164,7 +164,7 @@ require_once __DIR__ . '/router.php';
             <div class="gallery-item item-4" 
                  data-title="CALQ by Engr. Guides" 
                  data-category="Product Photography" 
-                 data-description="Precision-crafted grid layouts and typography systems for high-end editorial publications and collateral."
+                 data-description="Photos curated for the launch of a new product line scientific calculator."
                  data-img="<?php echo $asset_base; ?>/images/portfolio/calq/Banner Page.png"
                  data-link="underconstruction">
                 <img src="<?php echo $asset_base; ?>/images/portfolio/calq/Banner Page.png" alt="CALQ by Engr. Guides">
@@ -178,7 +178,7 @@ require_once __DIR__ . '/router.php';
             <div class="gallery-item item-5" 
                  data-title="2026 PAPSAS Midyear Interactive Youth Forum" 
                  data-category="Event Branding and Collaterals" 
-                 data-description="Dynamic promotional graphics, campaign key art, and visual identity extensions for large-scale creative initiatives."
+                 data-description="A vibrant and engaging forum for youth to connect and collaborate."
                  data-img="<?php echo $asset_base; ?>/images/portfolio/2026 midyear/Banner Page.png"
                  data-link="underconstruction">
                 <img src="<?php echo $asset_base; ?>/images/portfolio/2026 midyear/Banner Page.png"" alt="2026 PAPSAS Midyear Interactive Youth Forum">
