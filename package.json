@@ -1,0 +1,6 @@
+{
+  "name": "aecreates-online",
+  "version": "1.0.0",
+  "description": "PHP website on Vercel",
+  "private": true
+}

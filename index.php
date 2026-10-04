@@ -1,4 +1,4 @@
 <?php
-// Forward execution to the API handler without recursive requires
-$_GET['url'] = $_SERVER['REQUEST_URI'];
+// Forward root requests to the API router/index
+require_once __DIR__ . '/api/index.php';
 ?>
