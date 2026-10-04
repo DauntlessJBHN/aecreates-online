@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/index.php": {
-      "runtime": "vercel-bash"
+      "runtime": "vercel-bash@0.9.0"
     }
   },
   "rewrites": [
