@@ -50,7 +50,7 @@ switch ($request) {
         }
         exit; // Crucial: stops execution here
 
-        case '/merchandise':
+        case '/works/merchandise':
         $file = __DIR__ . '/works/merchandise/index.php';
         if (file_exists($file)) {
             include $file;
