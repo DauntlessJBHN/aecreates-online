@@ -1,16 +1,14 @@
 {
-  "buildCommand": "",
-  "outputDirectory": ".",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api/index.php"
+  "version": 2,
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.2"
     }
-  ],
-  "builds": [
+  },
+  "routes": [
     {
-      "src": "api/index.php",
-      "use": "vercel-php@0.7.2"
+      "src": "/(.*)",
+      "dest": "/api/index.php"
     }
   ]
 }
