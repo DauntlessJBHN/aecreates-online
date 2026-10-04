@@ -1,462 +1,448 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Banner Gallery - Bento Layout</title>
+    <title>STUDIO VECTRA | Graphic Design Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #0d0d0d;
-            --card-bg: #161616;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --accent: #ff3366;
-            --transition: cubic-bezier(0.25, 1, 0.5, 1);
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        ::-webkit-scrollbar-track {
+            background: #09090b;
         }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            overflow-x: hidden;
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
         }
-
-        /* Banner Gallery Section */
-        .banner-gallery-section {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 4rem 2rem;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
         }
-
-        .gallery-header {
-            text-align: center;
-            margin-bottom: 3.5rem;
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
-
-        .gallery-header h1 {
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #fff 30%, #777);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .animate-fade-in {
+            animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-
-        .gallery-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
         }
-
-        /* Asymmetrical Bento Grid Layout for 5 Landscape Works */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.5rem;
-            width: 100%;
-            max-width: 1300px;
-            margin-bottom: 3.5rem;
+        @media(min-width: 640px) {
+            .masonry-grid { column-count: 2; }
         }
-
-        .gallery-item {
-            position: relative;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
+        @media(min-width: 1024px) {
+            .masonry-grid { column-count: 3; }
         }
-
-        /* Custom Asymmetrical Spans & Heights (All Landscape) */
-        .item-1 { grid-column: span 12; height: 400px; }
-        .item-2 { grid-column: span 12; height: 300px; }
-        .item-3 { grid-column: span 12; height: 300px; }
-        .item-4 { grid-column: span 12; height: 350px; }
-        .item-5 { grid-column: span 12; height: 350px; }
-
-        @media (min-width: 768px) {
-            .item-1 { grid-column: span 12; height: 460px; }
-            .item-2 { grid-column: span 6; height: 340px; }
-            .item-3 { grid-column: span 6; height: 340px; }
-            .item-4 { grid-column: span 7; height: 380px; }
-            .item-5 { grid-column: span 5; height: 380px; }
-        }
-
-        @media (min-width: 1024px) {
-            .item-1 { grid-column: span 8; height: 480px; }
-            .item-2 { grid-column: span 4; height: 480px; }
-            .item-3 { grid-column: span 4; height: 360px; }
-            .item-4 { grid-column: span 4; height: 360px; }
-            .item-5 { grid-column: span 4; height: 360px; }
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s var(--transition), filter 0.5s ease;
-        }
-
-        /* Overlay details on hover */
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 2rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s var(--transition), transform 0.4s var(--transition);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.04);
-            filter: brightness(0.9);
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .gallery-item:hover {
-            box-shadow: 0 20px 40px rgba(255, 51, 102, 0.15);
-            transform: translateY(-4px);
-        }
-
-        .project-category {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent);
-            margin-bottom: 0.4rem;
-            font-weight: 700;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        /* View All Works CTA Button Container */
-        .gallery-footer-action {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .view-all-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2.2rem;
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: all 0.4s var(--transition);
-        }
-
-        .view-all-btn svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-            transition: transform 0.3s var(--transition);
-        }
-
-        .view-all-btn:hover {
-            background-color: var(--text-primary);
-            color: var(--bg-color);
-            border-color: var(--text-primary);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255, 51, 102, 0.2);
-        }
-
-        .view-all-btn:hover svg {
-            transform: translateX(4px);
-        }
-
-        /* Lightbox Modal Component */
-        .lightbox-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-            padding: 2rem;
-            backdrop-filter: blur(8px);
-        }
-
-        .lightbox-modal.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 900px;
-            width: 100%;
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
-            transform: scale(0.9) translateY(20px);
-            transition: transform 0.4s var(--transition);
-        }
-
-        .lightbox-modal.active .lightbox-content {
-            transform: scale(1) translateY(0);
-        }
-
-        .lightbox-image-container {
-            width: 100%;
-            height: 420px;
-            overflow: hidden;
-        }
-
-        .lightbox-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .lightbox-details {
-            padding: 2rem;
-        }
-
-        .lightbox-details h2 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .lightbox-details p {
-            color: var(--text-secondary);
-            line-height: 1.6;
+        .masonry-item {
+            break-inside: avoid;
             margin-bottom: 1.5rem;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            background: rgba(0,0,0,0.6);
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s, transform 0.2s;
-            z-index: 10;
-        }
-
-        .close-btn:hover {
-            background: var(--accent);
-            transform: rotate(90deg);
-        }
-
-        .view-project-btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: var(--text-primary);
-            color: var(--bg-color);
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .view-project-btn:hover {
-            background: var(--accent);
-            color: #fff;
         }
     </style>
 </head>
-<body>
+<body class="bg-white text-slate-900 font-sans antialiased selection:bg-slate-900 selection:text-white"">
 
-    <section class="banner-gallery-section">
-        <div class="gallery-header">
-            <h1>Featured Works</h1>
-            <p>Highlighting core brand identities, design systems, and key creative pieces.</p>
-        </div>
-
-        <!-- 5-Work Asymmetrical Landscape Bento Grid -->
-        <div class="gallery-grid">
-            <!-- Work 1 (Hero Large Landscape) -->
-            <div class="gallery-item item-1" 
-                 data-title="Flagship Brand Identity" 
-                 data-category="Brand Strategy & Visual System" 
-                 data-description="A detailed overview of the core brand system, typography hierarchy, and collateral assets designed for maximum market impact."
-                 data-img="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" alt="Flagship Brand Identity">
-                <div class="gallery-overlay">
-                    <span class="project-category">Brand System</span>
-                    <h3 class="project-title">Flagship Brand Identity</h3>
+    <header class="sticky top-0 z-40 backdrop-blur-xl bg-brand-950/80 border-b border-zinc-800/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-300 to-sky-300 flex items-center justify-center font-extrabold text-white shadow-lg shadow-sky-500/25 group-hover:scale-105 transition-transform duration-300">
+                    SV
                 </div>
-            </div>
-
-            <!-- Work 2 -->
-            <div class="gallery-item item-2" 
-                 data-title="Artisan Product Packaging" 
-                 data-category="Merchandise & Labeling" 
-                 data-description="Custom structural styling and sophisticated label design curated for high-end consumer goods and local artisan showcases."
-                 data-img="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" alt="Artisan Product Packaging">
-                <div class="gallery-overlay">
-                    <span class="project-category">Product Styling</span>
-                    <h3 class="project-title">Artisan Product Packaging</h3>
+                <div>
+                    <span class="font-bold tracking-wider text-base block leading-none text-white">STUDIO VECTRA</span>
+                    <span class="text-[11px] text-zinc-400 font-medium tracking-wide">CURATED DESIGN GALLERY</span>
                 </div>
-            </div>
-
-            <!-- Work 3 -->
-            <div class="gallery-item item-3" 
-                 data-title="Digital Experience & UI Kit" 
-                 data-category="Digital Media" 
-                 data-description="Futuristic layout concepts and digital UI branding assets designed for modern interactive web platforms."
-                 data-img="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop" alt="Digital Experience">
-                <div class="gallery-overlay">
-                    <span class="project-category">Digital Media</span>
-                    <h3 class="project-title">Digital Experience</h3>
-                </div>
-            </div>
-
-            <!-- Work 4 -->
-            <div class="gallery-item item-4" 
-                 data-title="Editorial & Print Layout" 
-                 data-category="Print Media" 
-                 data-description="Precision-crafted grid layouts and typography systems for high-end editorial publications and collateral."
-                 data-img="https://images.unsplash.com/photo-1542744094-24638eff58bb?q=80&w=1200&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?q=80&w=1200&auto=format&fit=crop" alt="Editorial Layout">
-                <div class="gallery-overlay">
-                    <span class="project-category">Print Media</span>
-                    <h3 class="project-title">Editorial & Print Layout</h3>
-                </div>
-            </div>
-
-            <!-- Work 5 -->
-            <div class="gallery-item item-5" 
-                 data-title="Motion & Key Visuals" 
-                 data-category="Creative Direction" 
-                 data-description="Dynamic promotional graphics, campaign key art, and visual identity extensions for large-scale creative initiatives."
-                 data-img="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop"
-                data-link="projects/brand-identity.html">
-                 <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop" alt="Motion & Key Visuals">
-                <div class="gallery-overlay">
-                    <span class="project-category">Creative Direction</span>
-                    <h3 class="project-title">Motion & Key Visuals</h3>
-                </div>
-            </div>
-        </div>
-
-        <!-- Button to Direct to All Works Page -->
-        <div class="gallery-footer-action">
-            <a href="all-works.html" class="view-all-btn">
-                <span>View All Works Archive</span>
-                <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
             </a>
+            <div class="flex items-center gap-4">
+                <span class="hidden md:inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Available for Commissions
+                </span>
+                <a href="#contact" class="text-xs font-semibold px-5 py-2.5 rounded-full bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all text-zinc-200">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 pt-20 pb-12 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8 border-b border-zinc-900">
+        <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-semibold mb-6 border border-indigo-500/20">
+                <i class="fa-solid fa-sparkles text-indigo-400"></i> Visual Artistry & Brand Ecosystems
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-[1.08]">
+                Elevating brands through <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">world-class design.</span>
+            </h1>
+            <p class="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-2xl">
+                Explore our curated gallery showcasing meticulous brand identities, custom typography experiments, immersive digital interfaces, and high-impact print works.
+            </p>
+        </div>
+        <div class="bg-zinc-900/60 p-6 rounded-2xl border border-zinc-800/80 backdrop-blur w-full md:w-auto min-w-[280px]">
+            <div class="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-3">Gallery Breakdown</div>
+            <div class="grid grid-cols-2 gap-3 text-left">
+                <div class="bg-zinc-900/90 p-3 rounded-xl border border-zinc-800">
+                    <span class="block text-2xl font-bold text-indigo-400">14+</span>
+                    <span class="text-xs text-zinc-400">Masterpieces</span>
+                </div>
+                <div class="bg-zinc-900/90 p-3 rounded-xl border border-zinc-800">
+                    <span class="block text-2xl font-bold text-purple-400">6</span>
+                    <span class="text-xs text-zinc-400">Categories</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Lightbox Modal Component -->
-    <div class="lightbox-modal" id="lightboxModal">
-        <div class="lightbox-content">
-            <button class="close-btn" id="closeModal">&times;</button>
-            <div class="lightbox-image-container">
-                <img id="modalImg" src="" alt="Project Preview">
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-zinc-900">
+            <div class="flex flex-wrap items-center gap-2" id="filter-tabs">
+                <button data-filter="all" class="filter-btn active px-4 py-2 rounded-full text-xs font-semibold transition-all bg-white text-zinc-950 shadow-md">All Works</button>
+                <button data-filter="branding" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold transition-all bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800">Branding</button>
+                <button data-filter="illustration" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold transition-all bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800">Illustration</button>
+                <button data-filter="typography" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold transition-all bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800">Typography</button>
+                <button data-filter="digital" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold transition-all bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800">Digital</button>
+                <button data-filter="print" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold transition-all bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800">Print</button>
             </div>
-            <div class="lightbox-details">
-                <span class="project-category" id="modalCategory" style="display:block; margin-bottom:0.4rem;">Category</span>
-                <h2 id="modalTitle">Project Title</h2>
-                <p id="modalDesc">Detailed project description goes here.</p>
-                <a href="#" class="view-project-btn" id="modalLink">Explore Full Case Study</a>
+            <div class="text-xs text-zinc-500 font-medium" id="gallery-counter">Showing all 14 projects</div>
+        </div>
+
+        <div id="gallery-masonry" class="masonry-grid">
+            <!-- Dynamic masonry cards injected via JavaScript -->
+        </div>
+    </main>
+
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4 sm:p-8" role="dialog" aria-modal="true">
+        <button id="lightbox-close" class="absolute top-6 right-6 z-50 w-12 h-12 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-white flex items-center justify-center transition-all border border-zinc-700/60 shadow-2xl group focus:outline-none">
+            <i class="fa-solid fa-xmark text-lg group-hover:rotate-90 transition-transform duration-300"></i>
+        </button>
+
+        <button id="lightbox-prev" class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-white flex items-center justify-center transition-all border border-zinc-700/60 shadow-2xl hover:scale-105 focus:outline-none">
+            <i class="fa-solid fa-chevron-left text-sm"></i>
+        </button>
+
+        <button id="lightbox-next" class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-white flex items-center justify-center transition-all border border-zinc-700/60 shadow-2xl hover:scale-105 focus:outline-none">
+            <i class="fa-solid fa-chevron-right text-sm"></i>
+        </button>
+
+        <div class="max-w-5xl max-h-[90vh] w-full flex flex-col items-center justify-center relative">
+            <div class="overflow-hidden rounded-2xl max-h-[65vh] flex items-center justify-center shadow-2xl bg-zinc-900 border border-zinc-800">
+                <img id="lightbox-image" src="" alt="Enlarged design work" class="max-h-[65vh] w-auto object-contain select-none transition-transform duration-300">
+            </div>
+            <div class="mt-6 text-center max-w-xl px-4">
+                <span id="lightbox-tag" class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-400 mb-2 border border-indigo-500/30"></span>
+                <h3 id="lightbox-title" class="text-2xl font-bold text-white mb-2"></h3>
+                <p id="lightbox-description" class="text-sm text-zinc-400 leading-relaxed"></p>
+                <div class="mt-4 text-xs font-medium text-zinc-500" id="lightbox-counter">1 / 14</div>
             </div>
         </div>
     </div>
 
+    <footer id="contact" class="border-t border-zinc-900 py-16 mt-24 bg-brand-950">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white text-sm">SV</div>
+                    <span class="font-bold tracking-wider text-lg text-white">STUDIO VECTRA</span>
+                </div>
+                <p class="text-sm text-zinc-400 leading-relaxed max-w-md">
+                    We craft exquisite visual identities and digital design experiences that captivate audiences and elevate brands to extraordinary heights.
+                </p>
+                <div class="mt-6 flex items-center gap-4 text-zinc-400">
+                    <a href="#" class="w-10 h-10 rounded-full bg-zinc-900 hover:bg-zinc-800 flex items-center justify-center hover:text-white transition-colors border border-zinc-800"><i class="fa-brands fa-behance"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-zinc-900 hover:bg-zinc-800 flex items-center justify-center hover:text-white transition-colors border border-zinc-800"><i class="fa-brands fa-dribbble"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-zinc-900 hover:bg-zinc-800 flex items-center justify-center hover:text-white transition-colors border border-zinc-800"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-zinc-900 hover:bg-zinc-800 flex items-center justify-center hover:text-white transition-colors border border-zinc-800"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800/80 backdrop-blur">
+                <h3 class="text-lg font-bold text-white mb-2">Let's Create Together</h3>
+                <p class="text-xs text-zinc-400 mb-6">Have a project in mind or want to discuss a commission? Reach out directly.</p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="email" placeholder="Enter your email address" class="bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-indigo-500 flex-1">
+                    <button onclick="alert('Thank you! We will get in touch with you shortly.')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-all shadow-lg shadow-indigo-600/30">
+                        Inquire
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-12 mt-12 border-t border-zinc-900 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500">
+            <p>© 2026 Studio Vectra. All rights reserved.</p>
+            <p class="mt-2 sm:mt-0">Designed with passion, Tailwind CSS & JavaScript.</p>
+        </div>
+    </footer>
+
     <script>
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const modal = document.getElementById('lightboxModal');
-        const closeModal = document.getElementById('closeModal');
-        
-        const modalImg = document.getElementById('modalImg');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalCategory = document.getElementById('modalCategory');
-        const modalDesc = document.getElementById('modalDesc');
-        const modalLink = document.getElementById('modalLink'); // <-- 1. Select the modal button
+        const portfolioWorks = [
+            {
+                id: 1,
+                title: "Vortex Brand Identity System",
+                category: "branding",
+                categoryName: "Branding",
+                image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+                description: "Comprehensive visual identity system featuring dynamic logotype, custom geometric iconographies, and corporate stationary suites."
+            },
+            {
+                id: 2,
+                title: "Neon Cyberpunk Vector Art",
+                category: "illustration",
+                categoryName: "Illustration",
+                image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=1200&q=80",
+                description: "High-detail vector cyberpunk street scene exploring neon luminescence, moody atmospheric gradients, and futuristic streetscapes."
+            },
+            {
+                id: 3,
+                title: "Kinetix Typeface Specimen",
+                category: "typography",
+                categoryName: "Typography",
+                image: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1200&q=80",
+                description: "Custom geometric sans-serif typeface specimen poster designed with stark contrast, precise kerning, and editorial grid alignment."
+            },
+            {
+                id: 4,
+                title: "Fintech Mobile Dashboard UI",
+                category: "digital",
+                categoryName: "Digital",
+                image: "https://images.unsplash.com/photo-1616469829941-c7200edec809?auto=format&fit=crop&w=1200&q=80",
+                description: "Sleek neomorphic dark-mode mobile banking application focused on frictionless micro-interactions and instant financial telemetry."
+            },
+            {
+                id: 5,
+                title: "Avant-Garde Architecture Monograph",
+                category: "print",
+                categoryName: "Print",
+                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+                description: "Hardcover editorial layout celebrating brutalist architectural forms with generous whitespace and swiss typographic grids."
+            },
+            {
+                id: 6,
+                title: "Botanical Serenade Packaging",
+                category: "branding",
+                categoryName: "Branding",
+                image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80",
+                description: "Sustainable organic skincare packaging design featuring embossed botanical illustrations and tactile matte finishes."
+            },
+            {
+                id: 7,
+                title: "Surrealist Dreamscape Illustration",
+                category: "illustration",
+                categoryName: "Illustration",
+                image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1200&q=80",
+                description: "Digital painting capturing a surreal cosmic landscape with vibrant pastel lighting and intricate environmental depth."
+            },
+            {
+                id: 8,
+                title: "Editorial Poster Series Vol. 4",
+                category: "typography",
+                categoryName: "Typography",
+                image: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1200&q=80",
+                description: "Experimental typographic poster series experimenting with overlapping glyph scales, distressed textures, and bold color blocking."
+            },
+            {
+                id: 9,
+                title: "SaaS Analytics Web Application",
+                category: "digital",
+                categoryName: "Digital",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+                description: "Comprehensive enterprise analytics dashboard featuring customizable data cards, fluid charts, and modular widgets."
+            },
+            {
+                id: 10,
+                title: "Independent Fashion Zine",
+                category: "print",
+                categoryName: "Print",
+                image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80",
+                description: "Independent risograph printed fashion zine featuring raw layout compositions, split-fountain inks, and custom editorial folds."
+            },
+            {
+                id: 11,
+                title: "Apex Coffee Roasters Branding",
+                category: "branding",
+                categoryName: "Branding",
+                image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=1200&q=80",
+                description: "Craft coffee bag packaging and tactile brand identity system designed for specialty single-origin micro-lots."
+            },
+            {
+                id: 12,
+                title: "Cosmic Odyssey Vector Poster",
+                category: "illustration",
+                categoryName: "Illustration",
+                image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+                description: "Vector space-themed poster art utilizing retro-futuristic color palettes and clean geometric linework."
+            },
+            {
+                id: 13,
+                title: "Kinetic Typography Motion Reel",
+                category: "typography",
+                categoryName: "Typography",
+                image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
+                description: "Dynamic typographic motion design project exploring rhythmic pacing, variable font weights, and kinetic choreography."
+            },
+            {
+                id: 14,
+                title: "Immersive Web3 NFT Gallery UI",
+                category: "digital",
+                categoryName: "Digital",
+                image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80",
+                description: "Futuristic decentralized web application interface featuring glassmorphic cards, glowing accents, and immersive 3D viewer integration."
+            }
+        ];
 
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const title = item.getAttribute('data-title');
-                const category = item.getAttribute('data-category');
-                const desc = item.getAttribute('data-description');
-                const imgSrc = item.getAttribute('data-img');
-                const projectUrl = item.getAttribute('data-link'); // <-- 2. Read the specific link
+        let activeFilter = 'all';
+        let currentFilteredWorks = [...portfolioWorks];
+        let currentLightboxIndex = 0;
 
-                modalTitle.textContent = title;
-                modalCategory.textContent = category;
-                modalDesc.textContent = desc;
-                modalImg.src = imgSrc;
-                modalLink.href = projectUrl; // <-- 3. Dynamically set the button's href
+        const masonryGrid = document.getElementById('gallery-masonry');
+        const galleryCounter = document.getElementById('gallery-counter');
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxDescription = document.getElementById('lightbox-description');
+        const lightboxTag = document.getElementById('lightbox-tag');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
 
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
+        function renderGallery(filter) {
+            activeFilter = filter;
+            currentFilteredWorks = filter === 'all' 
+                ? [...portfolioWorks] 
+                : portfolioWorks.filter(work => work.category === filter);
+
+            galleryCounter.textContent = `Showing ${currentFilteredWorks.length} projects`;
+            masonryGrid.innerHTML = '';
+
+            currentFilteredWorks.forEach((work, index) => {
+                const item = document.createElement('div');
+                item.className = 'masonry-item animate-fade-in group relative rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800/80 cursor-pointer shadow-xl hover:shadow-indigo-500/10 hover:border-zinc-700 transition-all duration-300';
+                item.style.animationDelay = `${index * 0.04}s`;
+
+                item.innerHTML = `
+                    <div class="overflow-hidden bg-zinc-950 relative">
+                        <img src="${work.image}" alt="${work.title}" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span class="text-[11px] font-semibold text-indigo-400 uppercase tracking-widest">${work.categoryName}</span>
+                                    <h3 class="text-base font-bold text-white mt-1">${work.title}</h3>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white transform translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg">
+                                    <i class="fa-solid fa-magnifying-glass-plus text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                item.addEventListener('click', () => openLightbox(index));
+                masonryGrid.appendChild(item);
+            });
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            updateLightboxContent();
+            lightboxModal.classList.remove('hidden');
+            setTimeout(() => {
+                lightboxModal.classList.remove('opacity-0');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightboxModal.classList.add('opacity-0');
+            setTimeout(() => {
+                lightboxModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        function updateLightboxContent() {
+            const work = currentFilteredWorks[currentLightboxIndex];
+            lightboxImage.src = work.image;
+            lightboxTitle.textContent = work.title;
+            lightboxDescription.textContent = work.description;
+            lightboxTag.textContent = work.categoryName;
+            lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${currentFilteredWorks.length}`;
+        }
+
+        function nextLightboxItem() {
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentFilteredWorks.length;
+            updateLightboxContent();
+        }
+
+        function prevLightboxItem() {
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentFilteredWorks.length) % currentFilteredWorks.length;
+            updateLightboxContent();
+        }
+
+        // Filter button event listeners
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-white', 'text-zinc-950', 'shadow-md');
+                    b.classList.add('bg-zinc-900', 'text-zinc-400', 'border', 'border-zinc-800');
+                });
+                e.target.classList.remove('bg-zinc-900', 'text-zinc-400', 'border', 'border-zinc-800');
+                e.target.classList.add('bg-white', 'text-zinc-950', 'shadow-md');
+
+                renderGallery(e.target.dataset.filter);
             });
         });
 
-        const closeLightbox = () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        };
+        // Lightbox events
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxNext.addEventListener('click', nextLightboxItem);
+        lightboxPrev.addEventListener('click', prevLightboxItem);
 
-        closeModal.addEventListener('click', closeLightbox);
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) {
                 closeLightbox();
             }
         });
 
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeLightbox();
-            }
+        document.addEventListener('keydown', (e) => {
+            if (lightboxModal.classList.contains('hidden')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextLightboxItem();
+            if (e.key === 'ArrowLeft') prevLightboxItem();
+        });
+
+        // Initialize gallery on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderGallery('all');
         });
     </script>
 </body>
