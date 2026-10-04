@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/index.php": {
-      "runtime": "Node.js 20.x"
+      "runtime": "vercel-bash"
     }
   },
   "rewrites": [
