@@ -1,6 +1,6 @@
 <?php
 // Call the separate router file
-require_once __DIR__ . '/../../router.php';
+require_once __DIR__ . '/../router.php';
 
 ?>
 <!DOCTYPE html>
@@ -50,7 +50,7 @@ require_once __DIR__ . '/../../router.php';
 </head>
 <body>
 
-<?php include __DIR__ . '/../../global/header.php'; ?>
+<?php include __DIR__ . '/../global/header.php'; ?>
 
 <div style="margin-top: 5vh;" class="bg-brand-950 text-zinc-100 antialiased selection:bg-indigo-500 selection:text-white">
 
