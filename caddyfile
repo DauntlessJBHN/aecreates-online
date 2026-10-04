@@ -1,0 +1,11 @@
+{
+    admin off
+    auto_https off
+    server_software
+}
+
+:{$PORT:-8080} {
+    root * /app
+    # If your entry point is inside api/ or public/, adjust this path accordingly:
+    php_server
+}
